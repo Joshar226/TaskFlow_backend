@@ -23,6 +23,17 @@ export class TaskController {
         }
     }
 
+    static getTaskById = async (req: Request, res: Response) => {
+        try {
+            const task = await Task.findById(req.task.id)
+                .populate({path: 'completedBy.user', select: 'id name'})
+                .populate({path: 'notes', populate: {path: 'createdBy', select: 'id name'}})
+            res.json(task)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     static updateStatus = async (req: Request, res: Response) => {
         try {
             const {status} = req.body

@@ -66,6 +66,13 @@ router.post('/:projectId/task',
 
 router.get('/:projectId/task', TaskController.getProjectTasks)
 
+router.get('/:projectId/task/:taskId',
+    param('projectId').isMongoId().withMessage('Invalid ID'),
+    param('taskId').isMongoId().withMessage('Invalid ID'),
+    handleInputErrors,
+    TaskController.getTaskById
+)
+
 router.post('/:projectId/task/:taskId/status',
     param('taskId').isMongoId().withMessage('Invalid ID'),
     body('status')
