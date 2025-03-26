@@ -23,7 +23,7 @@ export async function projectExist(req: Request, res: Response, next: NextFuncti
         req.project = project
         next()
     } catch (error) {
-        res.status(500).json({error: 'Hubo un error'})
+        res.status(500).json({error: 'Error'})
     }
 }
 
@@ -36,6 +36,6 @@ export async function hasAuthorization(req: Request, res: Response, next: NextFu
         }
         next()
     } catch (error) {
-        res.status(500).json({error: 'Hubo un error'})
+        res.status(500).json({error: 'Error'})
     }
 }

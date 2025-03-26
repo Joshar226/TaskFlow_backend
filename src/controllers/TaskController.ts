@@ -34,6 +34,17 @@ export class TaskController {
         }
     }
 
+    static updateTask = async (req: Request, res: Response) => {
+        try {
+            req.task.title = req.body.title
+            req.task.description = req.body.description
+            await req.task.save()
+            res.send('Task updated')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     static updateStatus = async (req: Request, res: Response) => {
         try {
             const {status} = req.body
@@ -48,6 +59,16 @@ export class TaskController {
             res.send('Status updated')
         } catch (error) {
             res.status(500).json({error: 'Error'})
+        }
+    }
+
+    static deleteTask = async (req: Request, res: Response) => {
+        try {
+            req.project.tasks = req.project.tasks.filter( task => task.toString() !== req.task.id.toString())
+            await Promise.allSettled([req.task.deleteOne(), req.project.save()])
+            res.send('Task deleted')
+        } catch (error) {
+            console.log(error);
         }
     }
 }

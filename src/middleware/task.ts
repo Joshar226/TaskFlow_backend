@@ -22,7 +22,7 @@ export async function taskExist(req: Request, res: Response, next: NextFunction)
         req.task = task
         next()
     } catch (error) {
-        res.status(500).json({error: 'Tarea no encontrada'})
+        res.status(500).json({error: 'Tarea not found'})
     }
 }
 
@@ -35,6 +35,6 @@ export async function taskBelongToProject(req: Request, res: Response, next: Nex
         }
         next()
     } catch (error) {
-        res.status(500).json({error: 'Tarea no encontrada'})
+        res.status(500).json({error: 'Tarea not found'})
     }
 }
