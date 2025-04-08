@@ -222,4 +222,20 @@ export class AuthController {
         }
         res.send('Correct Password')
     }
+
+    static updateProfile = async (req : Request, res: Response) => {
+        const {name, email} = req.body
+        const user = await User.findById(req.user.id)
+        
+        if(!user) {
+            const error = new Error('User not Found')
+            res.status(401).json({error: error.message})
+            return
+        }
+        user.name = name
+        user.email = email
+        
+        await user.save()
+        res.send('Profile Updated')
+    }
 }

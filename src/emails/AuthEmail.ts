@@ -11,7 +11,7 @@ type EmailType = {
 export class AuthEmail {
     static sendConfirmationEmail = async (user: EmailType) => {
         await transporter.sendMail({
-            from: 'TaskFlow <admin@taskflow.com>',
+            from: 'TaskFlow <josharaya226@gmail.com>',
             to: user.email,
             subject: 'TaskFlow - Confirma tu cuenta',
             text: 'TaskFlow - Confirma tu cuenta',

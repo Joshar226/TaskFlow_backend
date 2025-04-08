@@ -91,6 +91,15 @@ router.post('/check-password',
     AuthController.checkPassword 
 )
 
-
+router.post('/update-profile',
+    authenticate,
+    body('name')
+        .notEmpty().withMessage('Your name is required'),
+    body('email')
+        .isEmail().withMessage('Invalid E-mail')
+        .notEmpty().withMessage('Your email cannot be empty'),
+    handleInputErrors,
+    AuthController.updateProfile
+)
 
 export default router
